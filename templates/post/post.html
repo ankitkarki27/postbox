@@ -7,34 +7,35 @@
 
 <article class="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
     <!-- Post Header -->
-    <div class="flex items-center justify-between px-4 py-2">
+    <div class="flex items-center justify-between px-4 py-3">
         <div class="flex items-center gap-3">
             {% if post.author %}
-            <img class="w-10 h-10 rounded-full object-cover border border-gray-200"
+            <img class="w-9 h-9 rounded-full object-cover border border-gray-200"
                 src="{{ post.author.profile.avatar }}" alt="User Avatar">
-            <div class="leading-4 mt-2">
-                <h3 class="text-sm font-semibold text-gray-900"><a
-                        href="{% url 'userprofile' post.author.username %}">{{ post.author }}</a> </h3>
-                <p class="text-xs text-gray-500">@{{ post.author.username }}</p>
-                
+            <div>
+                <h3 class="text-sm font-semibold text-gray-900 mb-0.5">
+                    <a href="{% url 'userprofile' post.author.username %}" class="hover:underline">{{ post.author.profile.name|default:post.author.username }}</a>
+                </h3>
+                <div class="flex items-center gap-1.5">
+                    <!-- <p class="text-xs text-gray-500">@{{ post.author.username }}</p> -->
+                    <!-- <span class="text-xs text-gray-400">•</span> -->
+                     
+                    <span class="text-xs text-gray-400">{{post.created_at|timesince}} ago</span>
+                </div>
             </div>
             {% else %}
-            <img class="w-10 h-10 rounded-full object-cover border border-gray-200"
+            <img class="w-9 h-9 rounded-full object-cover border border-gray-200"
                 src="{% static 'images/avatar.svg' %}" alt="User Avatar">
-            <div class="leading-4 mt-2">
-                <h3 class="text-sm font-semibold text-gray-900">No Author</h3>
-                <!-- <p class="text-xs text-gray-500">@{{ post.author.username }}</p> -->
+            <div>
+                <h3 class="text-sm font-semibold text-gray-900 mb-0.5">No Author</h3>
+                <span class="text-xs text-gray-400">{{post.created_at|timesince}} ago</span>
             </div>
-
             {% endif %}
         </div>
 
-        <span class="text-xs text-gray-400  px-2 py-1 rounded-full">{{post.created_at|timesince}}
-                    ago</span>
+        <!-- Menu Button -->
         <div class="relative">
-            
-
-            <a onclick="toggleMenu(this)" class="text-gray-800 hover:text-gray-700 cursor-pointer">
+            <a onclick="toggleMenu(this)" class="text-gray-500 hover:text-gray-700 cursor-pointer transition-colors">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -46,52 +47,55 @@
                 id="dropdown-menu">
                 {% if user.is_authenticated and user == post.author %}
                 <a href="{% url 'post-edit' post.id %}"
-                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Edit</a>
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors">Edit</a>
                 <a href="{% url 'post-delete' post.id %}"
-                    class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-50">Delete</a>
+                    class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-50 transition-colors">Delete</a>
                 {% else %}
-                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Report</a>
+                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors">Report</a>
                 {% endif %}
             </div>
         </div>
     </div>
+
     <!-- Post Body / Description -->
-    <div class="px-4 py-0">
-        <p class="text-base font-medium text-gray-800 mb-0">
+    <div class="px-4 pb-2">
+        <p class="text-[15px] font-normal text-gray-900 leading-relaxed mb-2">
             {{ post.caption|urlize }}
         </p>
 
         {% if post.description %}
-        <div x-data="{ expanded: false }" class="mt-0 mb-2">
-            <p class="text-gray-800 text-xm whitespace-pre-line mt-0" :class="{'line-clamp-3': !expanded}">
+        <div x-data="{ expanded: false }" class="mb-2">
+            <p class="text-gray-700 text-[14px] leading-relaxed whitespace-pre-line" 
+               :class="{'line-clamp-3': !expanded}">
                 {{ post.description|urlize }}
             </p>
 
             {% if post.description|length > 150 %}
-            <div class="mt-1">
+            <div class="mt-1.5">
                 <a x-show="!expanded" @click="expanded = true"
-                    class="text-gray-900 hover:text-gray-700 text-xs font-medium cursor-pointer">
-                    more
+                    class="text-gray-800 hover:text-gray-800 text-[13px] font-medium cursor-pointer transition-colors">
+                    Read more
                 </a>
                 <a x-show="expanded" @click="expanded = false"
-                    class="text-gray-900 hover:text-gray-700 text-xs font-medium cursor-pointer">
-                    less
+                    class="text-gray-600 hover:text-gray-800 text-[13px] font-medium cursor-pointer transition-colors">
+                    Show less
                 </a>
             </div>
             {% endif %}
         </div>
         {% endif %}
-        <!-- Only show artist/source if exists -->
+
+        <!-- Artist/Source -->
         {% if post.artist and post.url %}
-        <p class="text-xs text-gray-500">
-            Image Source: <a href="{{ post.url }}" class="text-blue-600 hover:underline">@{{ post.artist }}</a>
+        <p class="text-xs text-gray-500 mt-2">
+            Image Source: <a href="{{ post.url }}" class="text-blue-600 hover:underline transition-colors">@{{ post.artist }}</a>
         </p>
         {% endif %}
     </div>
 
-    <!-- Only show image if exists -->
+    <!-- Image -->
     {% if post.image %}
-    <figure>
+    <figure class="border-t border-gray-100">
         <a href="{% url 'post' post.id %}" target="_blank">
             <img class="w-full max-h-[400px] object-cover" src="{{ post.image }}" alt="{{ post.caption }}">
         </a>
@@ -99,36 +103,37 @@
     {% endif %}
 
     <!-- Post Actions -->
-    <div class="px-4 py-3 flex items-center gap-4 text-gray-600 border-b border-gray-100">
-        <a href="#" class="flex items-center space-x-1 text-gray-500 hover:text-red-500">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+    <div class="px-4 py-2.5 flex items-center gap-4 text-gray-600 border-t border-gray-100">
+        <a href="#" class="flex items-center gap-1.5 text-gray-500 hover:text-red-500 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
                 stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                     d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
             </svg>
-            <span class="text-sm font-medium">{{ post.comments.count }}</span>
+            <span class="text-[13px] font-medium">{{ post.likes.count }}</span>
         </a>
 
         <a href="{% url 'post' post.id %}"
-            class="flex items-center space-x-1 text-gray-500 hover:text-blue-500 transition-colors duration-200">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+            class="flex items-center gap-1.5 text-gray-500 hover:text-blue-500 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
                 stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                     d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
             </svg>
-            <span class="text-sm font-medium">{{ post.comments.count }}</span>
+            <span class="text-[13px] font-medium">{{ post.comments.count }}</span>
         </a>
-
-       
     </div>
 
-
-    <div class="px-4 py-2 border-t border-gray-100">
+    <!-- Tags -->
+    {% if post.tags.all %}
+    <div class="px-4 py-2.5 border-t border-gray-100 bg-gray-50">
         {% for tag in post.tags.all %}
-        <a href="{% url 'tag-posts' tag.slug %}" class="text-xs text-blue-600 hover:underline mr-2">#{{ tag.name }}</a>
+        <a href="{% url 'tag-posts' tag.slug %}" class="text-xs text-blue-600 hover:text-blue-800 hover:underline transition-colors mr-2">
+            #{{ tag.name }}
+        </a>
         {% endfor %}
     </div>
-
+    {% endif %}
 </article>
 
 <script>

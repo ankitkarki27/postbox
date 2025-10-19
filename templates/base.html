@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conneqt</title>
+    <title>Conneqtly</title>
     <link rel="shortcut icon" type="image/png" href="{% static 'images/connect-logo-small.png' %}" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
 
@@ -17,7 +17,10 @@
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/htmx.org@1.9.2"></script>
+    <!-- HTMX WebSocket extension -->
+    <script src="https://unpkg.com/htmx.org/dist/ext/ws.js"></script>
     <script src="https://unpkg.com/hyperscript.org@0.9.14"></script>
+
     <style type="text/tailwindcss">
         [x-cloak] { 
             display: none !important; 
@@ -25,19 +28,19 @@
         
         :root {
             /* your solid brand color */
-  --primary-color: #0e30c4;
-  /* your two other stops */
-  --primary-mid:   #6103C1;
-  --primary-end:   #4F42FF;
+            --primary-color: #0e30c4;
+            /* your two other stops */
+            --primary-mid:   #6103C1;
+            --primary-end:   #4F42FF;
             /* Brand Colors */
             --primary4: #18056d;
             --primary:  #4f42ff;
             --primary5: linear-gradient(
-    90deg,
-    #032DE7 0%,
-    #6103C1 80%,
-    #4F42FF 100%
-  );
+                90deg,
+                #032DE7 0%,
+                #6103C1 80%,
+                #4F42FF 100%
+            );
   /* the gradient itself must be a single declaration */
   --primary-gradient: linear-gradient(
     135deg,
@@ -114,7 +117,7 @@
     min-height: 2rem;
     font-weight: 400;
     color: white;
-    background-image: var(--primary-color);
+    background-color: var(--primary);
     width: fit-content;
     transition: background-color 0.2s ease, transform 0.1s ease;
     border: none;
@@ -334,7 +337,7 @@
         /* Tabs */
         .tab {
             cursor: pointer;
-            padding: 0.75rem 1rem;
+             padding: 0.5rem 1rem;
             color: var(--gray-600); 
             background-color: var(--gray-100);
             border-radius: 0.5rem;
@@ -404,6 +407,7 @@
 </head>
 
 <!-- <body class="bg-gray-200 font1"> -->
+
 <body class="bg-gray-200 font1">
 
 
