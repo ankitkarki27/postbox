@@ -25,7 +25,7 @@ It provides instant WebSocket-based messaging and secure Google OAuth login with
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/your-username/postbox.git
+git clone https://github.com/your-username/Postbox-social-network-chatapp.git
 ````
 
 2.  Create a virtual environment and install dependencies:
