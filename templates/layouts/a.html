@@ -1,26 +1,24 @@
 {% extends 'base.html' %}
 
 {% block layout %}
-<content x-data="{ mobileSidebarOpen: false }" class="grid grid-cols-1 lg:grid-cols-12 max-w-8xl mx-auto my-6 px-6 gap-6">
+<div x-data="{ mobileSidebarOpen: false }" class="max-w-3xl mx-auto grid grid-cols-1 lg:grid-cols-12 my-6 px-6 gap-2">
 
-    <!-- Left Sidebar -->
-    <aside class="hidden lg:block lg:col-span-3 order-2">
-        {% include 'users/profile_sidebar.html' %}
-    </aside>
-<!-- main content middle -->
-    <main class="col-span-full lg:col-span-6 order-1 lg:order-2">
-        
+    <!-- Main Content -->
+    <main class="col-span-full lg:col-span-8 order-1 lg:order-2 space-y-4">
         {% block content %}
         {% endblock %}
     </main>
 
-    <!-- Right Sidebar -->
-    <aside class="hidden lg:block lg:col-span-3 order-3">
-        {% include 'includes/sidebar.html' %}
+    <!-- Right Sidebar (Desktop) -->
+    <aside class="hidden lg:block lg:col-span-4 order-3">
+        <div class="sticky top-20 space-y-4">
+            {% include 'includes/sidebar.html' %}
+        </div>
     </aside>
 
-    <!-- Mobile Sidebar Content -->
+    <!-- Mobile Sidebar -->
     <div x-show="mobileSidebarOpen" x-cloak class="lg:hidden col-span-full order-4 space-y-4">
+        
         <!-- Profile Sidebar Mobile -->
         <div class="bg-white rounded-lg border border-gray-100 p-4">
             <h2 class="text-md font-semibold text-gray-800 mb-3">Profile</h2>
@@ -34,5 +32,5 @@
         </div>
     </div>
 
-</content>
+</div>
 {% endblock %}
