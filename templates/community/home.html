@@ -1,0 +1,100 @@
+{% extends 'layouts/community.html' %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto space-y-6">
+
+    <!-- Page Header -->
+    <div class="bg-gray-100 p-4 rounded-lg shadow-sm">
+        <h1 class="text-lg font-semibold">Community</h1>
+        <p class="text-sm text-gray-600">
+            Discussions, questions, links, and polls from the community
+        </p>
+    </div>
+
+    <!-- Post 1: Text Post -->
+    <div class="bg-white p-4 rounded-lg shadow-sm space-y-2">
+        <div class="text-xs text-gray-500">
+            Posted by <span class="font-medium">ankit_dev</span> • 2 hours ago
+        </div>
+        <h2 class="text-base font-semibold">
+            How do you structure Django apps for large projects?
+        </h2>
+        <p class="text-sm text-gray-700">
+            I usually start with a single app and split later, but I am curious how others handle scaling.
+            Do you prefer domain based apps or feature based apps?
+        </p>
+        <div class="text-xs text-gray-500">
+            💬 12 comments • ⬆️ 48 upvotes
+        </div>
+    </div>
+
+    <!-- Post 2: Link Post -->
+    <div class="bg-white p-4 rounded-lg shadow-sm space-y-2">
+        <div class="text-xs text-gray-500">
+            Posted by <span class="font-medium">python_news</span> • 5 hours ago
+        </div>
+        <h2 class="text-base font-semibold">
+            Django 5.1 roadmap discussion
+        </h2>
+        <a href="#" class="text-sm text-blue-600 hover:underline">
+            https://github.com/django/django/discussions/roadmap
+        </a>
+        <p class="text-sm text-gray-700">
+            Some interesting changes planned around async views and ORM improvements.
+        </p>
+        <div class="text-xs text-gray-500">
+            🔗 Link post • 💬 8 comments • ⬆️ 31 upvotes
+        </div>
+    </div>
+
+    <!-- Post 3: Question Post -->
+    <div class="bg-white p-4 rounded-lg shadow-sm space-y-2">
+        <div class="text-xs text-gray-500">
+            Posted by <span class="font-medium">react_learner</span> • 1 day ago
+        </div>
+        <h2 class="text-base font-semibold">
+            RTK Query vs Axios for API calls?
+        </h2>
+        <p class="text-sm text-gray-700">
+            I am already using Redux Toolkit. Is RTK Query worth learning or should I stick with Axios and custom hooks?
+        </p>
+        <div class="text-xs text-gray-500">
+            ❓ Question • 💬 21 comments • ⬆️ 56 upvotes
+        </div>
+    </div>
+
+    <!-- Post 4: Poll Post -->
+    <div class="bg-white p-4 rounded-lg shadow-sm space-y-3">
+        <div class="text-xs text-gray-500">
+            Posted by <span class="font-medium">backend_daily</span> • 2 days ago
+        </div>
+        <h2 class="text-base font-semibold">
+            Which backend framework do you use the most?
+        </h2>
+
+        <div class="space-y-2 text-sm text-gray-700">
+            <div class="flex items-center space-x-2">
+                <input type="radio" disabled />
+                <span>Django</span>
+            </div>
+            <div class="flex items-center space-x-2">
+                <input type="radio" disabled />
+                <span>FastAPI</span>
+            </div>
+            <div class="flex items-center space-x-2">
+                <input type="radio" disabled />
+                <span>Laravel</span>
+            </div>
+            <div class="flex items-center space-x-2">
+                <input type="radio" disabled />
+                <span>Node.js</span>
+            </div>
+        </div>
+
+        <div class="text-xs text-gray-500">
+            Poll • 124 votes • ⬆ 39 upvotes
+        </div>
+    </div>
+
+</div>
+{% endblock %}
